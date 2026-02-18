@@ -1,20 +1,11 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
-
-# Run and deploy your AI Studio app
-
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/drive/1OZgPbYL_5mPc5-dPuoLG_P26r429n0GH
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- Backend: Spring Boot 3.2.1, Java 17, Spring Security + JWT (jjwt 0.12.3), Spring Data JPA
+- Database: H2 (development), switchable to MySQL/PostgreSQL; MySQL connector runtime
+- Build: Maven with Spring Boot plugin; Windows batch helpers (build.bat, run.bat)
+- PDF: iText 8.0.2
+- Frontend: Static HTML5, CSS3, Vanilla JavaScript served by Spring Boot
+- Optional Service: Python Flask chatbot on port 5000 (separate process)
+- Spring Boot hosts REST APIs and serves the static UI on port 8080; the UI uses fetch calls with Bearer tokens to access protected endpoints per role, enforced by Spring Security and the JWT filter.
+- JPA persists domain entities to the configured DB; H2 is preferred during development for speed, while MySQL can be used for persistence.
+- iText creates PDFs from domain data, saved to configured paths for download from dashboards.
+- The chatbot widget calls a Java proxy endpoint, which forwards to the Flask service on port 5000; if Flask is offline, the UI indicates service unavailability.
+- Maven orchestrates builds and runs; batch scripts simplify Windows usage.
